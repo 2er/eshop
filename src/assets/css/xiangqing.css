@@ -1,0 +1,115 @@
+*{
+    margin:0;
+    padding: 0;
+    font-family:微软雅黑;
+    letter-spacing:0.5px;
+}
+.DD_head{
+    width: 100%;
+    box-sizing: border-box;
+    /*background: #6abffc;*/
+}
+.DD_head_bg{
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+}
+.DD_head-half{
+    width: 50%;
+    box-sizing: border-box;
+    float: left;
+    position: absolute;
+    top: 10px;
+}
+.DD_deng{
+    width: 100%;
+    font-size: 4vw;
+    color:#eee;
+    padding:35px 0 0 20px;
+    box-sizing: border-box;
+}
+.DD_ZB{
+    width: 100%;
+    font-size: 3vw;
+    color:#eee;
+    padding:5px 0 35px 20px;
+    box-sizing: border-box;
+}
+.img_dwc{
+    padding: 25px;
+    width: 30vw;
+}
+.DD_name{
+    width: 100%;
+    box-sizing: border-box;
+}
+.DD_name1{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 5px 0;
+}
+.DD_name_div1{
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 3vw;
+    padding:10px 10px 5px 10px;
+    color: #a1a1a1
+}
+.DD_name_div2{
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 3vw;
+    padding: 5px 10px 10px 10px;
+    color: #a1a1a1;
+}
+.black1{
+    color: #333333;
+}
+.DD_tel{float: right}
+.DD_line{
+    width: 100%;
+    box-sizing: border-box;
+    height: 10px;
+    background: #ebebed;
+}
+.DD_shang{
+    font-size: 3.5vw;
+    color: #333;
+    padding: 10px;
+}
+.DD_border{
+    border-bottom:1px solid #eee
+}
+.DD_box{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    font-size: 3vw;
+    color: #a1a1a1;
+}
+.DD_border_left{float: left}
+.DD_border_right{float: right;color: #333;}
+.height20{height: 20px}
+.DD_chakan{width:40%;text-align:center;line-height:2.5;box-sizing: border-box;    margin-top: 3px;
+    margin-left: 5%;float:left;font-size: 3vw;color: #3fa9f5;border:1px solid #3fa9f5;border-radius: 5px; }
+.DD_liji{    margin-top: 3px;width:40%;text-align:center;line-height:2.5;box-sizing: border-box;font-size: 3vw;border-radius: 5px;float: right;background: #3fa9f5;color:#fff;margin-right: 5%;}
+.DD_ying{line-height: 2.5;}
+.DD_o_wid{width: 100%;padding: 10px;box-sizing: border-box;
+    position: fixed;bottom: 0;background: #fff;border-top:1px solid #eee}
+
+/*success*/
+.s_time{
+    background: #b7dffc;
+    color: #08304c;
+    font-size: 3.5vw;
+    padding: 0.5vw 1.5vw;
+    margin-left: 10px;
+    border-radius:29px;
+}
+.Bbg{
+    background: #ebebed;
+}
+.wbg{background: #fff}
+
+.ss_chakan{width:40%;text-align:center;line-height:2.5;box-sizing: border-box;    margin-top: 3px;
+    margin-left: 5%;float:left;font-size: 3vw;color: #333333;border:1px solid #ddd;border-radius: 5px; }
