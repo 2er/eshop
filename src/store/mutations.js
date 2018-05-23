@@ -89,15 +89,16 @@ export default {
     let category = (shop[category_id] || {})
     let item = (category[item_id] || {})
     if (item && item[food_id]) {
-      if (item[food_id]['num'] > 0) {
+      if (item[food_id]['num'] > 1) {
         item[food_id]['num']--
-        state.cartList = {...cart}
-        // 存入localStorage
-        setStore('eshopCart', state.cartList)
       } else {
         // 商品数量为0，则清空当前商品的信息
-        item[food_id] = null
+        delete category[item_id]
       }
+      console.log(cart)
+      state.cartList = {...cart}
+      // 存入localStorage
+      setStore('eshopCart', state.cartList)
     }
   },
   // 清空当前商品的购物车信息

@@ -28,7 +28,7 @@
                   </p>
                 </header>
                 <section v-for="(foods,foodindex) in item.goods" :key="foodindex" class="menu_detail_list">
-                  <router-link  :to="{path: 'shop/foodDetail', query:{image_path:foods.image_url, description: foods.brief, month_sales: foods.buy_count, name: foods.name, foods}}" tag="div" class="menu_detail_link">
+                  <div class="menu_detail_link">
                     <section class="menu_food_img">
                       <img :src="foods.image_url">
                     </section>
@@ -36,12 +36,12 @@
                       <h3 class="food_description_head">
                         <strong class="description_foodname">{{foods.name}}</strong>
                       </h3>
-                      <p class="food_description_content">{{foods.brief}}</p>
+                      <p class="food_description_content">{{foods.spec_info}}</p>
                       <p class="food_description_sale_rating">
                         <span>已售{{foods.buy_count}}份</span>
                       </p>
                     </section>
-                  </router-link>
+                  </div>
                   <footer class="menu_detail_footer">
                     <section class="food_price">
                       <span>¥</span>
@@ -329,10 +329,8 @@ export default {
           Object.keys(this.shopCart[item.cat_id]).forEach(itemid => {
             Object.keys(this.shopCart[item.cat_id][itemid]).forEach(foodid => {
               let foodItem = this.shopCart[item.cat_id][itemid][foodid]
-              console.log(foodItem)
               num += foodItem.num
               this.totalPrice += foodItem.num * foodItem.price
-              console.log(this.totalPrice)
               if (foodItem.num > 0) {
                 this.cartFoodList[cartFoodNum] = {}
                 this.cartFoodList[cartFoodNum].category_id = item.cat_id

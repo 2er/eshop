@@ -56,22 +56,27 @@
       <ul class="L_ul">
         <li class="L_li" @click="$router.push('/seller/goods')"><img src="../../assets/images/bottom_icon_home.png" class="L_menuimg"><div>购物</div></li>
         <li class="L_li" @click="$router.push('/seller/coupons')"><img src="../../assets/images/bottom_icon_dingdan.png" class="L_menuimg"><div>商家优惠</div></li>
-        <li class="L_li"><img src="../../assets/images/bottom_icon_me.png" class="L_menuimg"><div>我的</div></li>
+        <li class="L_li" @click="$router.push('/user/orders')"><img src="../../assets/images/bottom_icon_me.png" class="L_menuimg"><div>我的订单</div></li>
       </ul>
     </div>
     <div>
 
     </div>
+    <alert-tip v-if="showAlert" @closeTip="closeTipFun" :alertText="alertText"></alert-tip>
   </div>
 </template>
 
 <script>
 import { mapState, mapActions } from 'vuex'
 import { wxOauth } from '../../config/env'
+import alertTip from '../../components/common/alertTip'
 export default {
   name: 'user_center',
   data () {
     return {
+      showAlert: false,
+      alertText: null,
+      isWeiXin: false
     }
   },
   created () {
@@ -80,6 +85,7 @@ export default {
   mounted () {
   },
   components: {
+    alertTip
   },
   computed: {
     ...mapState([
@@ -107,6 +113,13 @@ export default {
       if (this.isLogin === false) {
         window.location.href = wxOauth
         return false
+      }
+    },
+    // 关闭提示框，跳转到订单列表页
+    closeTipFun () {
+      this.showAlert = false
+      if (this.gotoOrders) {
+        this.$router.push('/order')
       }
     }
   }

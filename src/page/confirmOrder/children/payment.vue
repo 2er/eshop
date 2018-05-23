@@ -25,19 +25,24 @@
         <div class="order_icon_contaienr">
           <span>支付方式</span>
         </div>
-        <span class="order_payment">{{payDetail.payment === '-1' ? '现金支付' : '在线支付'}}</span>
+        <span class="order_payment">{{payDetail.payment === '-1' ? '到店支付' : '在线支付'}}</span>
       </section>
     </section>
     <p class="determine" @click="confrimPay">确认支付</p>
+    <transition name="zoom" enter-active-class="zoomIn" leave-active-class="zoomOut">
+        <img class="confirmMark" v-if="confirmStatus" src=""/>
+    </transition>
     <alert-tip v-if="showAlert" @closeTip="closeTipFun" :alertText="alertText"></alert-tip>
+    <loading v-show="showLoading"></loading>
   </div>
 </template>
 
 <script>
 import headTop from '../../../components/header/head'
 import {mapState, mapMutations} from 'vuex'
-import {queryOrder} from '../../../service/getData'
+import {queryOrder, payOrder} from '../../../service/getData'
 import alertTip from '../../../components/common/alertTip'
+import loading from '../../../components/common/loading'
 
 export default {
   data () {
@@ -47,12 +52,15 @@ export default {
       alertText: null,
       countNum: 0, // 倒计时
       timeLimit: 900, // 过期时间
-      gotoOrders: false // 去付款
+      gotoOrders: false, // 去付款
+      confirmStatus: false, // 订单确认状态
+      showLoading: false
     }
   },
   components: {
     headTop,
-    alertTip
+    alertTip,
+    loading
   },
   created () {
     this.initData()
@@ -66,6 +74,7 @@ export default {
   },
   beforeDestroy () {
     clearInterval(this.timer)
+    clearInterval(this.confirmTimer)
   },
   props: [],
   computed: {
@@ -91,7 +100,9 @@ export default {
     ]),
     // 初始化信息
     async initData () {
+      this.showLoading = true
       let queryData = await queryOrder({order_id: this.orderMessage.order_id})
+      this.showLoading = false
       if (queryData.return_code === '0000') {
         this.payDetail = queryData.data
         if (queryData.data.pay_status !== '0') {
@@ -107,10 +118,29 @@ export default {
         }
         this.countNum = this.timeLimit + createTime - nowTime
         this.remainingTime()
+        this.queryConfirmTime()
       } else {
         this.showAlert = true
         this.alertText = this.payDetail.return_msg
       }
+    },
+    // 查询接单状态
+    async queryConfirm () {
+      let queryData = await queryOrder({order_id: this.orderMessage.order_id})
+      return queryData
+    },
+    queryConfirmTime () {
+      clearInterval(this.confirmTimer)
+      let vm = this
+      this.confirmTimer = setInterval(() => {
+        let queryData = vm.queryConfirm()
+        queryData.then(respData => {
+          if (respData.return_code === '0000' && respData.data.confirm_status === '1') {
+            vm.confirmStatus = true
+            clearInterval(vm.confirmTimer)
+          }
+        })
+      }, 2000)
     },
     // 倒计时
     remainingTime () {
@@ -125,17 +155,23 @@ export default {
       }, 1000)
     },
     // 确认付款
-    confrimPay () {
-      this.showAlert = true
-      this.alertText = '当前环境无法支付'
-      this.gotoOrders = true
+    async confrimPay () {
+      this.showLoading = true
+      let payData = await payOrder({order_id: this.orderMessage.order_id, pay_type: 'wx', source: 'eshop'})
+      this.showLoading = false
+      if (payData.return_code === '0000') {
+        window.location.href = payData.data.pay_url
+      } else {
+        this.showAlert = true
+        this.alertText = payData.return_msg
+      }
     },
     // 关闭提示框，跳转到订单列表页
     closeTipFun () {
       this.showAlert = false
-      if (this.gotoOrders) {
-        this.$router.push('/order')
-      }
+      // if (this.gotoOrders) {
+      //   this.$router.push('/order')
+      // }
     }
   }
 }
@@ -216,6 +252,12 @@ export default {
     border-radius: 0.2rem;
     margin-top: 0.5rem;
     font-weight: bold;
+  }
+  .confirmMark{
+    @include wh(30%,20%);
+    position: absolute;
+    top: 10%;
+    left: 50%;
   }
 
 </style>

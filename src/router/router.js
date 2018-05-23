@@ -64,7 +64,7 @@ export default [{
     },
     // 订单详情
     {
-      path: '/user/order',
+      path: '/user/order/:order_id',
       component: userOrder
     },
     // 商家优惠列表

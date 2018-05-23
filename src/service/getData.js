@@ -57,6 +57,36 @@ export const createOrder = (params) => fetch('', {method: 'member.order', params
 
 export const queryOrder = (params) => fetch('', {method: 'member.queryorder', params: params}, 'POST')
 
+/**
+ * 订单支付
+ */
+
+export const payOrder = (params) => fetch('', {method: 'member.orderpay', params: params}, 'POST')
+
+/**
+ * 订单取消
+ */
+
+export const cancelOrder = (params) => fetch('', {method: 'member.ordercancel', params: params}, 'POST')
+
+/**
+ * 订单完成
+ */
+
+export const finishOrder = (params) => fetch('', {method: 'member.orderfinish', params: params}, 'POST')
+
+/**
+ * 订单列表
+ */
+
+export const myOrders = (params) => fetch('', {method: 'member.orderlist', params: params}, 'POST')
+
+/**
+ * 订单详情
+ */
+
+export const orderDetail = (params) => fetch('', {method: 'member.orderdetail', params: params}, 'POST')
+
 export const getCards = (params) => fetch('', {method: 'card.cardinfo', params: params}, 'POST')
 
 export const getCoupons = () => fetch('', {method: 'member.coupons'}, 'POST')

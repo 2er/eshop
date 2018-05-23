@@ -33,9 +33,10 @@
           </li>
         </ul>
         <div class="food_item_style total_price">
-          <p class="food_name ellipsis">订单 ¥{{totalAmount}}</p>
+          <p class="food_name ellipsis">总金额</p>
           <div class="num_price">
-            <span>待支付 ¥{{totalAmount}}</span>
+            <span></span>
+            <span>¥{{totalAmount}}</span>
           </div>
         </div>
       </section>
@@ -43,7 +44,7 @@
         <header class="header_style">
           <span>支付方式</span>
           <div class="more_type" @click="showPayWayFun">
-            <span>{{payWay === 'online' ? '在线支付' : '现金支付'}}</span>
+            <span>{{payWay === 'online' ? '在线支付' : '到店支付'}}</span>
             <svg class="address_empty_right">
               <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#arrow-right"></use>
             </svg>
@@ -73,7 +74,7 @@
           <header>支付方式</header>
           <ul>
             <li :class="{choose: payWay == 'offline'}">
-              <span>现金支付</span>
+              <span>到店支付</span>
               <svg class="address_empty_right" @click="choosePayWay('offline')">
                 <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#select"></use>
               </svg>
@@ -384,7 +385,7 @@ export default {
         @include sc(.65rem, #666);
       }
       .food_name{
-        width: 11rem;
+        width: 9rem;
       }
       .num_price{
         flex: 1;

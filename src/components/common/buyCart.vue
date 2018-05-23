@@ -79,9 +79,6 @@ export default {
     },
     // 加入购物车，计算按钮位置。
     addToCart (category_id, item_id, food_id, name, price, specs, sku_id, stock, event) {
-      console.log(category_id)
-      console.log(item_id)
-      console.log(food_id)
       this.ADD_CART({category_id, item_id, food_id, name, price, specs, sku_id, stock})
       let elLeft = event.target.getBoundingClientRect().left
       let elBottom = event.target.getBoundingClientRect().bottom

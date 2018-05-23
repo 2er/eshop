@@ -6,7 +6,10 @@
          <span></span>
        </div>
        <p class="tip_text">{{alertText}}</p>
-       <div class="confrim" @click="closeTip">确认</div>
+       <div class="btns">
+         <div class="confrim" @click="confirmTip">确认</div>
+         <div class="cancel" @click="closeTip">取消</div>
+       </div>
      </section>
    </div>
 </template>
@@ -26,6 +29,9 @@ export default {
   methods: {
     closeTip () {
       this.$emit('closeTip')
+    },
+    confirmTip () {
+      this.$emit('confirmTip')
     }
   }
 }
@@ -91,17 +97,31 @@ export default {
       margin-top: .8rem;
       padding: 0 .4rem;
     }
-    .confrim{
-      @include sc(.8rem, #fff);
-      font-weight: bold;
-      margin-top: .8rem;
-      background-color: #4cd964;
+    .btns{
+      display: flex;
       width: 100%;
-      text-align: center;
-      line-height: 1.8rem;
-      border: 1px;
-      border-bottom-left-radius: 0.25rem;
-      border-bottom-right-radius: 0.25rem;
+      .confrim{
+        @include sc(.8rem, #fff);
+        font-weight: bold;
+        margin-top: .8rem;
+        background-color: #4cd964;
+        width: 50%;
+        text-align: center;
+        line-height: 1.8rem;
+        border: 1px;
+        border-radius: 0.25rem;
+      }
+      .cancel{
+        @include sc(.8rem, #fff);
+        font-weight: bold;
+        margin-top: .8rem;
+        background-color: #666;
+        width: 50%;
+        text-align: center;
+        line-height: 1.8rem;
+        border: 1px;
+        border-radius: 0.25rem;
+      }
     }
   }
 
